@@ -1,0 +1,157 @@
+{% load static %}
+
+{% url "manhole:homepage" as homepage_url %}
+{% url "manhole:dashboard" as dashboard_url %}
+{% url "manhole:logout" as logout_url %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>Manhole System</title>
+
+  <!-- Bootstrap core CSS -->
+  <link href="{% static "vendor/bootstrap/css/bootstrap.min.css" %}" rel="stylesheet">
+  <link href="{% static "css/simple-sidebar.css" %}" rel="stylesheet">
+  <!-- Custom styles for this template -->
+
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  
+  
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+
+
+</head>
+
+<body>
+
+  <div class="d-flex" id="wrapper">
+
+    <!-- Sidebar -->
+    <div class="bg-dark border-right" style="margin-right:-1px" id="sidebar-wrapper">
+      <div class="sidebar-heading text-white font-weight-bold pb-4">IOT MANHOLE SYSTEM</div>
+      <div class="list-group list-group-flush">
+        <a href="{% url "manhole:homepage" %}" class="list-group-item list-group-item-action {% if request.path == homepage_url %}bg-info{% else %} bg-dark {% endif %} text-success font-weight-bold">HOME</a>
+        {% if request.user.is_authenticated %}
+          <a href="{% url "manhole:dashboard" %}" class="list-group-item list-group-item-action {% if request.path == dashboard_url %}bg-secondary{% else %} bg-dark {% endif %} text-success font-weight-bold">DASHBOARD</a>
+          <a href="{% url "manhole:logout" %}" class="list-group-item list-group-item-action bg-dark text-success font-weight-bold">LOGOUT</a>
+        {% else %}
+          <a href="{% url "manhole:login" %}" class="list-group-item list-group-item-action bg-dark text-success font-weight-bold">LOGIN</a>
+        {% endif %}
+     
+      </div>
+    </div>
+    <!-- /#sidebar-wrapper -->
+
+    <!-- Page Content -->
+    <div id="page-content-wrapper">
+
+      <nav class="navbar navbar-expand-lg navbar-expand-md navbar-expand-sm navbar-light bg-dark">
+        <button class="btn btn-primary" id="menu-toggle"><i class="fas fa-bars" style="font-size:30px"></i></button>
+        
+        <h4 class="ml-lg-3 ml-md-2 text-white font-weight-bold">IOT BASED MANHOLE SYSTEM</h4>
+        
+      </nav>
+
+      <div class="container-fluid mt-3">
+        <div class="card-deck">
+          <div class="card bg-primary">
+            <div class="card-body text-center">
+               {% if message == 1 %}
+        
+                <div id="dialog" title="No Connection">
+                  <p style="color:red">Please connect arduino board properly</p>
+                </div> 
+              
+              {% endif %} 
+              <h4 class="card-title text-white font-weight-bold">TILT SENSOR</h4>
+              {% if accelerometer < 300 %}
+              <p class="card-text  font-weight-bold text-danger">Cover Tilted</p>
+              {% else %}
+              <p class="card-text  font-weight-bold text-white">Cover Normal</p>
+              {% endif %}
+              {% if accelerometer < 300 %}
+        
+                <div id="dialog" title="Tilt Warning">
+                  <p style="color:red">Cover Tilted</p>
+                </div> 
+              
+              {% endif %}
+            </div>
+          </div>
+          <div class="card bg-warning">
+            <div class="card-body text-center">
+              <h4 class="card-title text-white font-weight-bold">Smoke </h4>
+              {% if gas > 525 %}
+              <p class="card-text  font-weight-bold text-danger">Smoke Warning</p>
+              {% else %}
+              <p class="card-text  font-weight-bold text-white">Normal Smoke level</p>
+              {% endif %}
+              {% if gas > 525 %}
+        
+                <div id="dialog" title="Smoke Warning">
+                  <p style="color:red">Dangerous Smoke</p>
+                </div> 
+              
+              {% endif %}
+            </div>
+          </div>
+          <div class="card bg-success">
+            <div class="card-body text-center">
+              <h4 class="card-title text-white">Overflow</h4>
+              {% if rain < 225 %}
+              <p class="card-text  font-weight-bold text-danger">Overflow Warning</p>
+              {% else %}
+              <p class="card-text  font-weight-bold text-white">Normal Level</p>
+              {% endif %}
+              {% if rain < 225 %}
+        
+                <div id="dialog" title="Overflow Warning">
+                  <p style="color:red">Overflow Warning</p>
+                </div> 
+              
+              {% endif %}
+            </div>
+          </div>
+          
+        </div>
+        
+      </div>
+    </div>
+    <!-- /#page-content-wrapper -->
+
+  </div>
+  <!-- /#wrapper -->
+
+  <!-- Bootstrap core JavaScript -->
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+
+  <!-- Menu Toggle Script -->
+  <script>
+
+    $( function() {
+      $("#dialog").dialog();
+      $('.ui-widget-header').css({ 'background-color': '#e9171f' });
+      $('.ui-dialog-titlebar').css({ 'background-color': 'red' });
+      $('.ui-dialog-titlebar-close').css({ 'background-color': 'red' });
+    });
+
+    $("#menu-toggle").click(function(e) {
+      e.preventDefault();
+      $("#wrapper").toggleClass("toggled");
+    });
+  </script>
+
+</body>
+
+</html>

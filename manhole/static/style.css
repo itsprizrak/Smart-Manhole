@@ -1,0 +1,46 @@
+body {
+	background-color:transparent;
+}
+
+
+.header {
+	background: url(manhole.jpg) no-repeat center center fixed; 
+-webkit-background-size: cover;
+-moz-background-size: cover;
+-o-background-size: cover;
+background-size: cover; 
+}
+
+.text-overlay {
+  background-color: rgba(31, 31, 31, 0.75)
+}
+
+.header h1 {
+  color:#FFFF66;
+}
+.header h2 {
+  color:#ffff66;
+}
+.header p {
+  color:#d6851a;
+}
+link {
+  color: green;
+  background-color: transparent;
+  text-decoration: none;
+}
+a:visited {
+  color: #f0fff0;
+  background-color: transparent;
+  text-decoration: none;
+}
+a:hover {
+  color: red;
+  background-color: transparent;
+  text-decoration: underline;
+}
+a:active {
+  color: yellow;
+  background-color: transparent;
+  text-decoration: underline;
+}

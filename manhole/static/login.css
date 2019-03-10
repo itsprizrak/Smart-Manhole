@@ -1,0 +1,48 @@
+body {
+	background-image: url('login.jpg');
+}
+
+.section-title h1 {
+	color: #129CF3;
+	text-align: center;
+	font-weight: 600;
+	font-family: sans-serif;
+	margin-bottom: 10px;
+}
+
+
+
+form {
+	font-size: 18px;
+	color: #333333;
+	font-family: sans-serif;
+	font-weight: 400;
+}
+
+input[type="text"], textarea {
+
+  font-size: 15px;
+
+}
+
+
+
+
+input::-webkit-input-placeholder {
+	font-size: 13px;
+	color: #59677f !important;
+	font-family: sans-serif;
+
+}
+ 
+input:-moz-placeholder { /* Firefox 18- */
+color: red !important;  
+}
+ 
+input::-moz-placeholder {  /* Firefox 19+ */
+color: red !important;  
+}
+ 
+input:-ms-input-placeholder {  
+color: red !important;  
+}
